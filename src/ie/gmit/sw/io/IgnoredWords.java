@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.io;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,9 +11,9 @@ public class IgnoredWords {
 	
 	private TreeSet<String> wordsToIgnore;
 	
-	public IgnoredWords() {
+	public IgnoredWords(String filename) {
 		wordsToIgnore = new TreeSet<String>();
-		parse("res/stopwords.txt");
+		parse(filename);
 	}
 	
 	private void parse(String fileName){
@@ -46,9 +46,5 @@ public class IgnoredWords {
 	
 	public boolean contains(String word){
 		return wordsToIgnore.contains(word);
-	}
-	
-	public static void main(String[] args) {
-		new IgnoredWords();
 	}
 }
