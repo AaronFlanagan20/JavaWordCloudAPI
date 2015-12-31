@@ -1,4 +1,4 @@
-package ie.gmit.sw.io;
+package ie.gmit.sw.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -30,8 +31,10 @@ public class ParserImpl implements Parser {
 			choice = JOptionPane.showInputDialog("Enter if you want to parse a file or a url");
 
 			if(choice.equalsIgnoreCase("file")){
+				System.out.println("Option Chosen: File");
 				chooseFile();
 			}else if(choice.equalsIgnoreCase("url")){
+				System.out.println("Option Chosen: Url");
 				chooseUrl();
 			}else{
 				System.out.println("Error: You must select either a file or url");
@@ -42,21 +45,32 @@ public class ParserImpl implements Parser {
 	}
 	
 	public void chooseFile(){
-		System.out.println("Option Chosen: File");
-		
 		JFileChooser fileChooser = new JFileChooser();
 		int returnedFile = fileChooser.showOpenDialog(null);
 		
 		if(returnedFile == JFileChooser.APPROVE_OPTION){
+			String filetype;
 			File chosenFile = new File(""+fileChooser.getSelectedFile());
-			parseText(chosenFile);
+			try {
+				filetype= Files.probeContentType(chosenFile.toPath());//retrn file type eg .txt
+				System.out.println("The chosen file is of type: " + filetype);
+				if(filetype.equals("text/plain") || filetype.equals("application/pdf")){
+					parseText(chosenFile);
+				}else{
+					System.out.println("Wrong file");
+					chooseFile();
+				}
+			}catch (IOException e) {
+				System.out.println("Not a vaild file..");
+				chooseFile();
+			}catch(NullPointerException ne){
+				System.out.println("The file chosen is empty..");
+				chooseFile();
+			}
 		}
 	}
 	
-	//url still isn't parsing right
 	public void chooseUrl(){
-		System.out.println("Option Chosen: Url");
-		
 		File file = new File("UrlFile");
 		PrintWriter ot = null;
 
@@ -88,7 +102,8 @@ public class ParserImpl implements Parser {
 			ne.printStackTrace();
 		}
 		
-		parseText(file);		
+		parseText(file);
+		file.deleteOnExit();
 	}
 	
 	public void parseText(File chosenFile) {
@@ -117,7 +132,7 @@ public class ParserImpl implements Parser {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			//e.printStackTrace();
-		}
+			e.printStackTrace();
+		}		
 	}
 }

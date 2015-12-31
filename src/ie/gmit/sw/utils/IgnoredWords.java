@@ -1,4 +1,4 @@
-package ie.gmit.sw.io;
+package ie.gmit.sw.utils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

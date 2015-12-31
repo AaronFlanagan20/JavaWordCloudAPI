@@ -1,6 +1,7 @@
-package ie.gmit.sw.io;
+package ie.gmit.sw.runner;
 
 import ie.gmit.sw.image.PaintWordCloud;
+import ie.gmit.sw.utils.*;
 
 public class Runner {
 	

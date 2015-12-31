@@ -1,4 +1,4 @@
-package ie.gmit.sw.io;
+package ie.gmit.sw.utils;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -34,6 +34,10 @@ public class WordMap{
 	public Set<Entry<String, Integer>> entrySet() {
 		HashMap<String, Integer> copy = (HashMap<String, Integer>) wordMap.clone();
 		return copy.entrySet();
+	}
+	
+	public boolean isEmpty(){
+		return wordMap.isEmpty();
 	}
 
 	public void printMap(){
