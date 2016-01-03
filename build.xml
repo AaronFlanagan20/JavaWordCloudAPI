@@ -19,7 +19,6 @@
 	<!-- Declare global properties (name/value pairs) for this build -->
 	
 	<property name="user.name" value="G00330035"/>
-	
 	<property name="org.name" value="Galway-Mayo Institute of Technology"/>
 	<property name="app.name" value="Java Word Cloud API"/>
 	<property name="app.version" value="1.0"/>
