@@ -31,6 +31,8 @@
 	<path id="classpath">
     	<pathelement location="." />
 		<pathelement location="./lib/jsoup-1.8.3.jar"/>
+		<pathelement location="./lib/junit.jar"/>
+		<pathelement location="./lib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
   	</path>
   	
 	<echo>

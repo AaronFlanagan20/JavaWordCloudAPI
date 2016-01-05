@@ -13,12 +13,16 @@ public class WordMap{
 	}
 	
 	public void addWord(String word, int frequency){
-		wordMap.put(word, frequency);
+		if(!word.equals("") || word != null){
+			wordMap.put(word, frequency);
+		}
 	}
 	
 	public void removeWord(String word){
 		if(wordMap.containsKey(word)){
-			wordMap.remove(word);
+				wordMap.remove(word);
+		}else{
+			System.out.println("WordMap doesn't contain that word");
 		}
 	}
 	

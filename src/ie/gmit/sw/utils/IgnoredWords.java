@@ -35,13 +35,19 @@ public class IgnoredWords {
 	}
 	
 	public void addWord(String word){
-		if(!wordsToIgnore.contains(word))
+		if(!wordsToIgnore.contains(word)){
 			wordsToIgnore.add(word);
+		}else{
+			System.out.println("Word already in list");
+		}
 	}
 	
 	public void removeWord(String word){
-		if(wordsToIgnore.contains(word))
+		if(wordsToIgnore.contains(word)){
 			wordsToIgnore.remove(word);
+		}else{
+			System.out.println("Word not in list");
+		}
 	}
 	
 	public boolean contains(String word){
