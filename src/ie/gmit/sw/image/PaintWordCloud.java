@@ -18,8 +18,7 @@ import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 
-import ie.gmit.sw.utils.WordMap;
-
+import ie.gmit.sw.io.WordMap;
 
 /*
  * PaintWordCloud is a 3 step process.
@@ -27,8 +26,9 @@ import ie.gmit.sw.utils.WordMap;
  * 2. Take these words and sort tem be frequency 
  * 3. Paint the words into a cloud
  */
-public class PaintWordCloud {
+public class PaintWordCloud implements Paintable {
 	
+	@SuppressWarnings("unused")
 	private WordMap wordMap;
 	private BufferedImage image = new BufferedImage(600, 300, BufferedImage.TYPE_4BYTE_ABGR);
 
@@ -41,7 +41,7 @@ public class PaintWordCloud {
 	/*
 	 * Step 1 Strip most frequent words and store
 	 */
-	private void getMostFrequent(WordMap wordMap) {
+	public void getMostFrequent(WordMap wordMap) {
 		
 		Map<String, Integer> entries = new HashMap<String, Integer>();
 								
@@ -63,7 +63,7 @@ public class PaintWordCloud {
 	/*
 	 * Step 2: Sort these words by frequency
 	 */
-	private void sortEntries(Map<String, Integer> entries){
+	public void sortEntries(Map<String, Integer> entries){
 		
 		Comparator<Map.Entry<String, Integer>> byMapValues = new Comparator<Map.Entry<String, Integer>>() {
 	        public int compare(Map.Entry<String, Integer> left, Map.Entry<String, Integer> right) {
@@ -84,7 +84,7 @@ public class PaintWordCloud {
 	/*
 	 * Step 3: Take the words and paint them to an word cloud image to be outputted
 	 */
-	private void paint(List<Entry<String, Integer>> sortedValues){
+	public void paint(List<Entry<String, Integer>> sortedValues){
 		Graphics2D graphics = (Graphics2D) image.getGraphics();
 		Font font;
 		

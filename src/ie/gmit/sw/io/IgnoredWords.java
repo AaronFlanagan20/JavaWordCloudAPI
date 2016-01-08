@@ -1,4 +1,4 @@
-package ie.gmit.sw.utils;
+package ie.gmit.sw.io;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -7,15 +7,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.TreeSet;
 
+/*
+ * IgnoredWords is a Treeset of words to ignore when parsing.
+ * These are frequent;y used words like a, the and but.
+ */
 public class IgnoredWords {
 	
 	private TreeSet<String> wordsToIgnore;
-	
+	/*
+	 * On creation the treeset is initialized and the filename is passe in to be parsed.
+	 */
 	public IgnoredWords(String filename) {
 		wordsToIgnore = new TreeSet<String>();
 		parse(filename);
 	}
 	
+	/*
+	 * Reading through the file line by line, ignoredwords takes each word to ignore and passes it in.
+	 */
 	private void parse(String fileName){
 		BufferedReader br;
 		try {
@@ -34,6 +43,9 @@ public class IgnoredWords {
 		}
 	}
 	
+	/*
+	 * Below is some delegate methods for adding and removing if needed.
+	 */
 	public void addWord(String word){
 		if(!wordsToIgnore.contains(word)){
 			wordsToIgnore.add(word);

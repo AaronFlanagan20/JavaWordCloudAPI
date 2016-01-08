@@ -1,9 +1,12 @@
-package ie.gmit.sw.utils;
+package ie.gmit.sw.io;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
-
+/*
+ * WordMap is hashmap mapping wors to there frequency.
+ * Parserimpl will parse text and insert a word and frequency into our wordmap.
+ */
 public class WordMap{
 	
 	private HashMap<String, Integer> wordMap;

@@ -1,11 +1,11 @@
 package ie.gmit.sw.test;
 
-import ie.gmit.sw.utils.WordMap;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.*;
+
+import ie.gmit.sw.io.WordMap;
 
 public class TestWordMap {
 	

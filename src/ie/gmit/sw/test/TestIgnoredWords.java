@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.*;
 
-import ie.gmit.sw.utils.IgnoredWords;
+import ie.gmit.sw.io.IgnoredWords;
 
 public class TestIgnoredWords {
 		

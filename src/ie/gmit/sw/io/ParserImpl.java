@@ -1,4 +1,4 @@
-package ie.gmit.sw.utils;
+package ie.gmit.sw.io;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,13 +16,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+/*
+ * ParserImpl is our implementation class that implements Parser
+ * It's job is to build a word map by parsing text or a url and checking the IgnoredWords list
+ */
 public class ParserImpl implements Parser {
 	
 	private String choice;
 	private IgnoredWords ignoredWords;
 	private WordMap wordMap;
-	private volatile Elements[] all;
+	private volatile Elements[] all;//volatile for when a change occurs
 		
+	/*
+	 * The contructor prompts the user with a dialog box to enter text.
+	 * Two options are allowed file or url.
+	 * Once an option is chosen the user choose's a file or url to parse
+	 */
 	public ParserImpl(IgnoredWords ignoredWords, WordMap wordMap) {	
 		this.ignoredWords = ignoredWords;
 		this.wordMap = wordMap;
@@ -44,6 +53,9 @@ public class ParserImpl implements Parser {
 		}
 	}
 	
+	/*
+	 * chooseFile opens a filechooser for th user to select a file to parse
+	 */
 	public void chooseFile(){
 		JFileChooser fileChooser = new JFileChooser();
 		int returnedFile = fileChooser.showOpenDialog(null);
@@ -70,6 +82,9 @@ public class ParserImpl implements Parser {
 		}
 	}
 	
+	/*
+	 * chooseUrl opens another dialog window for the user to put in a url
+	 */
 	public void chooseUrl(){
 		File file = new File("UrlFile");
 		PrintWriter ot = null;
@@ -106,6 +121,11 @@ public class ParserImpl implements Parser {
 		file.deleteOnExit();
 	}
 	
+	/*
+	 * Finally parseText does all the heavy work by reading the file or url,
+	 * checking the ignoredword list for if it contains the word
+	 * and placing it in the wordmap with it's frequency if it doesn't
+	 */
 	public void parseText(File chosenFile) {
 		System.out.println("Now parsing file");
 		
