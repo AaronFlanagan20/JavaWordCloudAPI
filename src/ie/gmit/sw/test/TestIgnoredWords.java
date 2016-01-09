@@ -13,7 +13,7 @@ public class TestIgnoredWords {
 	
 	@Before
 	public void setup(){
-		ignoredWords = new IgnoredWords("res/stopwords.txt");
+		ignoredWords = new IgnoredWords();
 	}
 	
 	@After

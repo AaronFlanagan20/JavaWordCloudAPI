@@ -24,17 +24,18 @@
 	<property name="app.version" value="1.0"/>
 	<property name="app.version.name" value="Scarab"/>
 	<property name="jre.target" value="1.8"/>
+	<property name="jars.location" value="./lib"></property>
 	<property name="srcDir" value="./src/"/>
 	<property name="distDir" value="./dist"/>
 	<property name="docDir" value="${distDir}/docs"/>
-
+	
 	<path id="classpath">
     	<pathelement location="." />
-		<pathelement location="./lib/jsoup-1.8.3.jar"/>
-		<pathelement location="./lib/junit.jar"/>
-		<pathelement location="./lib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+		<pathelement location="${jars.location}/jsoup-1.8.3.jar"/>
+		<pathelement location="${jars.location}/junit.jar"/>
+		<pathelement location="${jars.location}/org.hamcrest.core_1.3.0.v201303031735.jar"/>
   	</path>
-  	
+	
 	<echo>
 	    ----------------------------------------------------------------------------
 		Application: ${app.name} ${app.version}
@@ -43,8 +44,15 @@
 	    Run by     : ${user.name}
 	    Base Dir   : ${basedir}
 	    Java Home  : ${java.home}
+		Jars	   : ${jars.location}
 	    ----------------------------------------------------------------------------
   	</echo>
+	
+	<target name="test">
+		<exec dir="${basedir}" executable="dir" output="dir.txt">
+		<arg line="dir" ></arg>
+		</exec>
+	</target>
 	
 	<!-- Delete any previously created directories and files -->
     <target name="clean">
@@ -67,10 +75,9 @@
 		</javac>
 	</target>
 
-
 	<!-- Create Java application archive (Jar) -->
 	<target name="archive" depends="compile">
-        <jar destfile="${distDir}/wordcloud.jar" basedir="${distDir}" excludes="**/*Test.class, **/Compact*.class">         
+        <jar destfile="${distDir}/wordcloud.jar" basedir="${distDir}" excludes="**/*Test.class, **/Compact*.class">
         	 <manifest>
         	 	<attribute name="Main-Class" value="ie.gmit.sw.Runner"/>
 				<attribute name="Built-By" value="${user.name}"/>
@@ -78,6 +85,11 @@
 				<attribute name="Implementation-Title" value="${app.name}"/>
 				<attribute name="Implementation-Version" value="${app.version}"/>
 			</manifest>
+        	<fileset dir="${jars.location}"/>
+        	<!-- Due to signatures of the three jars, the manifest files must be excluded -->
+        	<zipfileset excludes="META-INF/*.SF" src="${jars.location}/junit.jar"/>
+        	<zipfileset excludes="META-INF/*.SF" src="${jars.location}/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+        	<zipfileset excludes="META-INF/*.SF" src="${jars.location}/jsoup-1.8.3.jar"/>
         </jar>
     </target>
 	

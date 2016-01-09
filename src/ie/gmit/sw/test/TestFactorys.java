@@ -15,8 +15,8 @@ public class TestFactorys {
 	
 	@Test
 	public void testIgnoredWordsInstance(){
-		ignoredWords = IgnoredWordFactory.createIgnoredWords("res/stopwords.txt");
-		IgnoredWords ign = new IgnoredWords("res/stopwords.txt");
+		ignoredWords = IgnoredWordFactory.createIgnoredWords();
+		IgnoredWords ign = new IgnoredWords();
 		
 		assertTrue(ignoredWords != ign);
 		assertFalse(ignoredWords == null);

@@ -1,11 +1,14 @@
 package ie.gmit.sw.io;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.TreeSet;
+
+import javax.swing.JFileChooser;
 
 /*
  * IgnoredWords is a Treeset of words to ignore when parsing.
@@ -14,12 +17,30 @@ import java.util.TreeSet;
 public class IgnoredWords {
 	
 	private TreeSet<String> wordsToIgnore;
+	private String filename;
 	/*
-	 * On creation the treeset is initialized and the filename is passe in to be parsed.
+	 * On creation the treeset is initialized a filechooser is opened and the filename is passed in to be parsed.
 	 */
-	public IgnoredWords(String filename) {
+	public IgnoredWords() {
 		wordsToIgnore = new TreeSet<String>();
+		chooseFile();
 		parse(filename);
+	}
+	
+	/*
+	 * Choose a file to be passed in for parsing
+	 */
+	private String chooseFile(){
+		JFileChooser fileChooser = new JFileChooser();
+		int returnedFile = fileChooser.showOpenDialog(null);
+		File chosenFile;
+		
+		if(returnedFile == JFileChooser.APPROVE_OPTION){
+			chosenFile = new File(""+fileChooser.getSelectedFile());
+			filename = chosenFile.getPath();
+			System.out.println(filename);
+		}
+		return filename;
 	}
 	
 	/*

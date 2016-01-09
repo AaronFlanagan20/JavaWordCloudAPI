@@ -155,7 +155,7 @@ public class PaintWordCloud implements Paintable {
 		
 		try {
 			graphics.dispose();
-			ImageIO.write(image, "png", new File("image.png"));
+			ImageIO.write(image, "png", new File("wordcloud.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

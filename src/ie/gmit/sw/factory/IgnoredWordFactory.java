@@ -6,8 +6,8 @@ public class IgnoredWordFactory {
 	
 	private static IgnoredWords ignoredWords;
 	
-	public static IgnoredWords createIgnoredWords(String filename){
-		ignoredWords = new IgnoredWords(filename);
+	public static IgnoredWords createIgnoredWords(){
+		ignoredWords = new IgnoredWords();
 		
 		return ignoredWords;
 	}
